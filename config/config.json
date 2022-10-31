@@ -1,11 +1,10 @@
 {
   "development": {
-    "username": null,
-    "password": null,
-    "database": "api-db",
+    "username": "postgres",
+    "password": "admin123",
+    "database": "tiktuk-users",
     "host": "127.0.0.1",
-    "dialect": "sqlite",
-    "storage": "./api-db.sqlite3"
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",

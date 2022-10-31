@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     
     static associate(models) {
       // define association here
+      this.user = this.belongsTo(models.Video)
     }
   };
   Like.init({

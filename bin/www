@@ -7,10 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('api:server');
 var http = require('http');
+const {sequelize} = require('../models/index');
 
 /**
  * Get port from environment and store in Express.
  */
+
+sequelize.sync({force: false});
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
