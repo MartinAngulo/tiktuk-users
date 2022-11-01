@@ -5,6 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  "engines": {
+    "node": "16.15.0"
+  },
   "dependencies": {
     "@api.video/nodejs-sdk": "^1.8.5",
     "bcrypt": "^5.0.0",

@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Video extends Model {
     /**
@@ -11,9 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.user = this.belongsTo(models.User);
-      
-      
+      this.user = this.belongsTo(models.User, {
+        foreignKey: 'userId'
+      });
+      this.belongsToMany(models.User, {
+        through: models.Like,
+        foreignKey: "videoId"
+      })
     }
   };
   Video.init({
@@ -27,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Video',
   });
-7
-  Video.paginate = async (pageParam,userId) => {
+
+  Video.paginate = async (pageParam, userId) => {
     console.log(pageParam);
     const escapedUserId = sequelize.escape(`${userId}`);
     const limit = 4;
@@ -43,10 +46,10 @@ module.exports = (sequelize, DataTypes) => {
             // Note the wrapping parentheses in the call below!
             sequelize.literal(`(
                     SELECT COUNT(*)
-                    FROM Likes as likes
+                    FROM "Likes" as likes
                     WHERE
-                        likes.videoId = Video.id
-                        AND likes.userId = ${escapedUserId}
+                        likes."videoId" = "Video".id
+                        AND likes."userId" = ${escapedUserId}
                 )`),
             'isLikedByCurrentUser'
           ]
@@ -62,8 +65,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-
   return Video;
-
-  
 };
+

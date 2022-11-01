@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Like = require('../models').Like;
+const { Like } = require('../models/index');
 
 
 let validateOwner = (req, res, next) => {

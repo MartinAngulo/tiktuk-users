@@ -1,4 +1,5 @@
-'use strict';
+// 'use strict';
+const pg = require('pg');
 
 const fs = require('fs');
 const path = require('path');
@@ -7,13 +8,26 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
-// import * as pg from 'pg';
 
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password,
+    // config
+    {
+    logging: false,
+    native: false,
+    dialect: config.dialect,
+    dialectModule: pg,
+    // dialectOptions: {
+    //   ssl: {
+    //     require: true,
+    //     rejectUnauthorized: false,
+    //   }
+    // }
+    }
+  );
 }
 
 fs
@@ -26,11 +40,15 @@ fs
     db[model.name] = model;
   });
 
+// modelDefiners.forEach(model => model(sequelize));
+// Capitalizamos los nombres de los modelos ie: product => Product
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
+
+const { Video, User, Like } = db;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

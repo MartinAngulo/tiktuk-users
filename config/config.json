@@ -1,10 +1,11 @@
 {
-  "development": {
-    "username": "postgres",
-    "password": "admin123",
-    "database": "tiktuk-users",
+  "development2": {
+    "username": null,
+    "password": null,
+    "database": "api-db",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "sqlite",
+    "storage": "./api-db.sqlite3"
   },
   "test": {
     "username": "root",
@@ -19,5 +20,12 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
+  },
+  "development": {
+    "username": "postgres",
+    "password": "admin123",
+    "database": "tiktuk-users",
+    "host": "localhost:5432",
+    "dialect": "postgres"
   }
 }

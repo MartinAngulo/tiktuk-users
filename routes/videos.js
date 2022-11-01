@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Video = require('../models').Video;
+const { Video } = require('../models/index');
 
 const uploader = require('../lib/storage');
 const VideoApi = require('../lib/video-api');

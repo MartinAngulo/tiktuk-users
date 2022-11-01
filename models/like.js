@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Like extends Model {
     /**
@@ -19,12 +18,24 @@ module.exports = (sequelize, DataTypes) => {
     
     static associate(models) {
       // define association here
-      this.user = this.belongsTo(models.Video)
+      
     }
   };
   Like.init({
-    userId: DataTypes.INTEGER,
-    videoId: DataTypes.INTEGER
+    userId:{ 
+      type: DataTypes.INTEGER,
+      references:{
+        model: "Users",
+        key:"id",
+      },
+    },
+    videoId: {
+      type: DataTypes.INTEGER,
+      references:{
+        model: "Videos",
+        key:"id",
+      },
+    }
   }, {
     sequelize,
     modelName: 'Like',

@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken');
-const User = require('../models').User;
-const Video = require('../models').Video;
+const { User, Video } = require('../models/index');
 
 const passport = require('passport');
 

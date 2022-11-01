@@ -14,14 +14,14 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id'
-        }
+        },
       },
       videoId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Videos',
-          key: 'id'
+          key: 'id',
         }
       },
       createdAt: {

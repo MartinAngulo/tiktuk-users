@@ -1,5 +1,6 @@
 let bcrypt = require('bcrypt');
 'use strict';
+const {DataTypes} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     email: {
@@ -54,6 +55,10 @@ module.exports = (sequelize, DataTypes) => {
   
   User.associate = function(models) {
     // associations can be defined here
+    User.belongsToMany(models.Video, {
+      through: models.Like,
+      foreignKey: "userId"
+    })
   };
   return User;
 };
